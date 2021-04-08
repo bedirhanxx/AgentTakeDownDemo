@@ -33,12 +33,8 @@ public class LineFollower : MonoBehaviour
         float befDist = 0.5f;
         if (stopped == false)
         {
-            while (DistanceXZ(transform.position, lastPoint) > 0.5f)
-            {
+            while (DistanceXZ(transform.position, lastPoint) > 0.5f) {
                 float distance = Vector3.Distance(this.transform.position, lastPoint);
-
-
-                //Debug.Log(distance);
 
                 if (distance < stopDistance)
                 {
@@ -62,7 +58,8 @@ public class LineFollower : MonoBehaviour
                 Debug.DrawRay(transform.position, diff, Color.gray);
                 float angle = Mathf.Atan2(diff.x, diff.z) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.AngleAxis(angle, Vector3.up), rotateSpeed * Time.fixedDeltaTime);
-                yield return new WaitForFixedUpdate();
+                yield
+                return new WaitForFixedUpdate();
             }
             body.velocity = Vector3.zero;
         }

@@ -41,29 +41,24 @@ public class MouseLook : MonoBehaviour
         mouseDeltaX += Input.GetAxis("Mouse X") * _sensitivityX;
         mouseDeltaY += Input.GetAxis("Mouse Y") * _sensitivityY;
 
-        // Add current rot to list, at end
         _rotArrayX.Add(mouseDeltaX);
         _rotArrayY.Add(mouseDeltaY);
 
-        // Reached max number of steps? Remove oldest from list
         if (_rotArrayX.Count >= _averageFromThisManySteps)
             _rotArrayX.RemoveAt(0);
 
         if (_rotArrayY.Count >= _averageFromThisManySteps)
             _rotArrayY.RemoveAt(0);
 
-        // Add all of these rotations together
         for (int i_counterX = 0; i_counterX < _rotArrayX.Count; i_counterX++)
             rotAverageX += _rotArrayX[i_counterX];
 
         for (int i_counterY = 0; i_counterY < _rotArrayY.Count; i_counterY++)
             rotAverageY += _rotArrayY[i_counterY];
 
-        // Get average
         rotAverageX /= _rotArrayX.Count;
         rotAverageY /= _rotArrayY.Count;
 
-        // Apply
         _playerRootT.Rotate(0f, rotAverageX, 0f, Space.World);
         _cameraT.Rotate(-rotAverageY, 0f, 0f, Space.Self);
     }

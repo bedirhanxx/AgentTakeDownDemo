@@ -7,10 +7,6 @@ public class CheckEnemyCount : MonoBehaviour
     public GameObject[] AllEnemysAlive;
     public int EnemyCount;
     public GameObject Crosshair;
-    void Start()
-    {
-        CheckEnemys();
-    }
 
     public void CheckEnemys()
     {

@@ -16,10 +16,8 @@ public class FPSCamShooting : MonoBehaviour
     {
         time += Time.deltaTime;
         RaycastHit hit;
-        
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, LayerMasks))
         {
-
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             if (hit.transform.gameObject.tag == "Enemy")
             {
@@ -27,7 +25,6 @@ public class FPSCamShooting : MonoBehaviour
                 {
                     hit.transform.GetComponent<EnemyHealth>().damageEnemy(shootDamage);
                     time = 0.0f;
-                    
                 }
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.green);
                 Weapon.GetComponent<Animator>().SetBool("hit", true);
@@ -36,15 +33,11 @@ public class FPSCamShooting : MonoBehaviour
             {
                 Weapon.GetComponent<Animator>().SetBool("hit", false);
             }
-
-
-            //Debug.Log("Did Hit Wall");
         }
         else
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
             Weapon.GetComponent<Animator>().SetBool("hit", false);
-            //Debug.Log("Did not Shoot");
         }
     }
 }

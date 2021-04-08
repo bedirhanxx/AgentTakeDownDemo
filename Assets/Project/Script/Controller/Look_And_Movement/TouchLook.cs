@@ -21,7 +21,6 @@ public class TouchLook : MonoBehaviour
                 rotationZ = invertX ? rotationZ : rotationZ * -1;
                 float rotationX = delta.y * sensitivityY * Time.deltaTime;
                 rotationX = invertY ? rotationX : rotationX * -1;
-
                 transform.localEulerAngles += new Vector3(rotationX, rotationZ, 0);
             }
         }

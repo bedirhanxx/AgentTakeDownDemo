@@ -18,7 +18,6 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     [Header("Raycast Settings")]
     public RaycastHit hit;
     public Vector2 rayOffset = new Vector2(0, 0); //change this if need to offset
-    
 
     #region Singleton
     public static InputManager instance = null;
@@ -51,14 +50,14 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
     public void OnPointerUp(PointerEventData _eventData)
     {
-            if (cliclable)
+        if (cliclable)
+        {
+            if (!drawReset)
             {
-                if (!drawReset)
-                {
-                    draw.GetComponent<Draw>().ResetLine();
-                    drawReset = true;
-                }
+                draw.GetComponent<Draw>().ResetLine();
+                drawReset = true;
             }
+        }
     }
 
     private void Update()
@@ -71,41 +70,40 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             drawReset = true;
         }
 
-
         if (eventData == null) return;
 
         Ray ray = cam.GetComponent<Camera>().ScreenPointToRay(eventData.position + rayOffset);
         Physics.Raycast(ray, out hit);
-            if (draw != null && hit.transform != null)
+        if (draw != null && hit.transform != null)
+        {
+            if (hit.transform.gameObject.tag == "ResetArea")
             {
-                if (hit.transform.gameObject.tag == "ResetArea")
-                {
-                    draw.ResetLine();
-                    drawReset = true;
-                }
-                if (hit.transform.gameObject.tag == "Enemy")
-                {
-                    draw.ResetLine();
-                    drawReset = true;
-                }
-                if (hit.transform.gameObject.tag == "Player")
-                {
-                    draw.ResetLine();
-                    drawReset = true;
-                }
-                if (hit.transform.gameObject.tag == "FinishDraw")
-                {
-                    drawReset = true;
-                    eventData = null;
-                    draw.CompleteDrawing();
-                    drawReset = true;
-                    cliclable = false;
-                }
-                if (!drawReset)
-                {
-                    draw.DrawLine(hit.point + (hit.normal * 0.05f));
-                }
-            } 
+                draw.ResetLine();
+                drawReset = true;
+            }
+            if (hit.transform.gameObject.tag == "Enemy")
+            {
+                draw.ResetLine();
+                drawReset = true;
+            }
+            if (hit.transform.gameObject.tag == "Player")
+            {
+                draw.ResetLine();
+                drawReset = true;
+            }
+            if (hit.transform.gameObject.tag == "FinishDraw")
+            {
+                drawReset = true;
+                eventData = null;
+                draw.CompleteDrawing();
+                drawReset = true;
+                cliclable = false;
+            }
+            if (!drawReset)
+            {
+                draw.DrawLine(hit.point + (hit.normal * 0.05f));
+            }
+        }
     }
     #endregion
 }
