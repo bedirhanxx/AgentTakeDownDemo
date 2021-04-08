@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraFollowPlayer : MonoBehaviour
 {
+    [Header("Objects")]
     public GameObject PlayerBase;
-    public Vector3 offset;
     void Update()
     {
         if (!GameManager.Instance.winLevel)
@@ -18,7 +18,5 @@ public class CameraFollowPlayer : MonoBehaviour
             GetComponent<MouseLook>().enabled = false;
             GetComponent<FPSCamShooting>().Weapon.SetActive(false);
         }
-            
-
     }
 }

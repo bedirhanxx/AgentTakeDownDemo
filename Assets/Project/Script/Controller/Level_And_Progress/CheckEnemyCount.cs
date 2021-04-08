@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CheckEnemyCount : MonoBehaviour
 {
+    [Header("Alive Enemy List")]
     public GameObject[] AllEnemysAlive;
     public int EnemyCount;
+    [Header("Objects")]
     public GameObject Crosshair;
 
     public void CheckEnemys()
@@ -18,7 +20,6 @@ public class CheckEnemyCount : MonoBehaviour
             Crosshair.SetActive(false);
             GameManager.Instance.winLevel = true;
         }
-
     }
     void Update()
     {
